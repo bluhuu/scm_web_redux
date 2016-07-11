@@ -1,0 +1,175 @@
+{
+    "total": 9,
+    "rows": [{
+        "id": 1002964,
+        "text": "商品管理",
+        "value": "商品管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1003046,
+        "text": "客商管理",
+        "value": "客商管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1002966,
+        "text": "交易管理",
+        "value": "交易管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1002971,
+        "text": "促销管理",
+        "value": "促销管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1002995,
+        "text": "会员中心",
+        "value": "会员中心",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1003020,
+        "text": "营销中心",
+        "value": "微信端内容管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1003094,
+        "text": "监管中心",
+        "value": "监管中心",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": ""
+    }, {
+        "id": 1003116,
+        "text": "统计分析",
+        "value": "统计分析",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": "统计分析"
+    }, {
+        "id": 1003119,
+        "text": "系统管理",
+        "value": "系统管理",
+        "icon": "/elink_scm_web/images/Folder.gif",
+        "Description": "系统管理"
+    }]
+}
+
+
+[{
+    "id": 1003050,
+    "text": "单品管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000926,
+    "value": "Single_SProduct_Entry",
+    "url": "sproduct/single_sproduct_mgr.jsp",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1002999,
+    "text": "商品价格管理",
+    "value": "商品价格管理",
+    "icon": "/elink_scm_web/images/Folder.gif",
+    "Description": ""
+}, {
+    "id": 1002989,
+    "text": "商品上下架设置",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000910,
+    "value": "Product_Shelves_Config",
+    "url": "sproduct/sproduct_shelves_config.js",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1002968,
+    "text": "商品品牌设置",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000897,
+    "value": "SProduct_Brand_Config",
+    "url": "promotion/infosproduct.js;sproduct/sproduct_brand_configform.js;sproduct/sproduct_brand_mgr.js;",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1003032,
+    "text": "商品分类管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000931,
+    "value": "SProduct_Classification_Mgr",
+    "url": "sproduct/classification_products_list.js;sproduct/sproduct_classification_form.js;sproduct/sproduct_classification_mgr.js;",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1002991,
+    "text": "商品库存管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000912,
+    "value": "SProduct_Storage_Config",
+    "url": "sproduct/sproduct_storage_configform.js;sproduct/sproduct_storage_mgr.js;",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}]
+
+
+
+[{
+    "id": 1003003,
+    "text": "群组价管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000918,
+    "value": "Group_Price_Mgr",
+    "url": "member/infomember.js;sproductprice/infogroupmember.js;sproductprice/member_group_configform.js;sproductprice/infogroup.js;promotion/infosproduct.js;sproductprice/sproduct_groupprice_configform.js;sproductprice/sproduct_groupprice_mgr.js",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1003001,
+    "text": "协议价管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000921,
+    "value": "SProduct_Protocol_Price_Mgr",
+    "url": "promotion/infosproduct.js;member/infomember.js;sproductprice/sproduct_groupprice_configform.js;sproductprice/sproduct_protocolprice_mgr.js;",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}, {
+    "id": 1003051,
+    "text": "会员等级价管理",
+    "leaf": true,
+    "icon": "/elink_scm_web/images/mForm.png",
+    "moduleID": 1000922,
+    "value": "Sproduct_Grade_Price_Mgr",
+    "url": "promotion/infosproduct.js;smember/infomember_rule.js;sproductprice/sproduct_gradeprice_configform.js;sproductprice/sproduct_gradeprice_mgr.js;",
+    "readOnly": true,
+    "canExport": true,
+    "canReport": true,
+    "action": "X",
+    "Description": ""
+}]

@@ -1,0 +1,75 @@
+{
+  "total": 3,
+  "rows": [
+    {
+      "S_Product_ID": 1127400,
+      "ProductName": "血府逐瘀颗粒",
+      "BrandName": "test2",
+      "ClassName": "感冒发烧",
+      "S_classification_ID": "1000000006",
+      "S_brand_ID": "1000001",
+      "S_Promotion_Range_ID": "1000038",
+      "Isinclude": "参与"
+    },
+    {
+      "S_Product_ID": 1141829,
+      "ProductName": "测试药品-宗",
+      "BrandName": "测试品牌1",
+      "ClassName": "测试分类3",
+      "S_classification_ID": "1000000025",
+      "S_brand_ID": "1000003",
+      "S_Promotion_Range_ID": "1000039",
+      "Isinclude": "参与"
+    },
+    {
+      "S_Product_ID": 1127410,
+      "ProductName": "测试品种2-宗AAA品名",
+      "BrandName": "test2",
+      "ClassName": "胃肠道疾",
+      "S_classification_ID": "1000000010",
+      "S_brand_ID": "1000001",
+      "S_Promotion_Range_ID": "1000040",
+      "Isinclude": "参与"
+    }
+  ]
+}
+
+deleteData:{
+  "removed": [
+    "1000040"
+  ]
+}
+
+
+http://192.168.20.206:8080/elink_scm_web/sProductAction/query.do
+start:0
+limit:25
+dir:ASC
+S_Product_ID:222
+S_erpProduct_ID:333
+name:444
+value:111
+validation:
+appSessionID:1467765895784.2
+
+http://192.168.20.206:8080/elink_scm_web/promotionRangeAction/save.do
+  "ProductFullName" 盐酸艾司洛尔注射液（欣洛平）
+  "S_Product_ID" 1127430
+  "productID" 1127430
+"PromotionRuleID" 1000180
+"promotionReferenceID" 0
+"rangeType" SP
+
+BrandName : "测试品牌1"
+CertificateNo : "国药准字H20056800"
+ClassName : "保健食品>>抗生素>>感冒发烧"
+Manufacturer : "济南永宁制药股份有限公司"
+ProductCode : "1035905"
+  ProductName : "盐酸艾司洛尔注射液（欣洛平）"
+  S_Product_ID : 1127430
+ProductSpec : "1ml：0.1g*5支"
+S_brand_ID : "1000003"
+S_classification_ID : "1000000006"
+Uomname : "盒"
+Value : "&YSASLEZSYXLP"
+indexForSort : 0
