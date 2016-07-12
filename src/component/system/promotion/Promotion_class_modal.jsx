@@ -263,6 +263,7 @@ let Promotion_class_modal = React.createClass({
     this.setState({ visible: false });
   },
   showModal() {
+    // this.refs.classIform.fetch();
     if (!this.props.selectedRows) {//如果是添加
       this.setState({visible: true});
     } else if (this.props.selectedRows) {//如果是修改
@@ -472,7 +473,7 @@ let Promotion_class_modal = React.createClass({
                       rowKey = {record => record.S_Promotion_Range_ID}
                       size='small'
                       bordered />*/}
-              <Promotion_class_iform />
+              <Promotion_class_iform ref='classIform' selectedRows={this.props.selectedRows}/>
             </TabPane>
             <TabPane tab="排除商品" key="2">
               <div style={formStyle}>
