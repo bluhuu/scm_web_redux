@@ -458,7 +458,7 @@ let Promotion_class_iform = React.createClass({
         </div>
         <Table  rowSelection={rowSelection}
                 onRowClick={this.handleRowClick}
-                columns = {columns}//classColumns
+                columns = {classColumns}//classColumns
                 dataSource = {this.state.data}
                 scroll={{ x: false, y: false }}
                 pagination = {this.state.pagination}
