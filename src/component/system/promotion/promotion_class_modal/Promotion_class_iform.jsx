@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button, Tabs, Table, Form, Input, Modal, Icon, Row, Col, Radio, DatePicker, message, Cascader } from 'antd';
-import SProductAction_Modal from '../../common/sProductAction/SProductAction_Modal';
-import Promotion_class_iform from './promotion_class_modal/Promotion_class_iform'
+import SProductAction_Modal from '../../../common/sProductAction/SProductAction_Modal';
 import classNames from 'classnames';
-import SelectByRefId from '../../common/SelectByRefId';
-import '../../common/Format';
+import SelectByRefId from '../../../common/SelectByRefId';
+import '../../../common/Format';
 const InputGroup = Input.Group;
 const confirm = Modal.confirm;
 const createForm = Form.create;
@@ -19,6 +18,7 @@ let formStyle = {
   'borderRadius': 6,
   'marginBottom': 0,
 };
+
 let columns = [
     {
       title: '商品编号',
@@ -87,7 +87,7 @@ let classColumns = [
   }
 ];
 
-let Promotion_class_modal = React.createClass({
+let Promotion_class_iform = React.createClass({
   getDefaultProps() {
       return {
           pageSize: 10,
@@ -145,7 +145,7 @@ let Promotion_class_modal = React.createClass({
       let params = {
           limit: this.state.pagination.pageSize,
           start: (this.state.pagination.current - 1) * this.state.pagination.pageSize,
-          PromotionRuleID:this.props.selectedRows.length>0 && this.props.selectedRows[0].S_PROMOTION_RULE_ID,
+          // PromotionRuleID:this.props.selectedRows.length>0 && this.props.selectedRows[0].S_PROMOTION_RULE_ID,
           productName:this.state.searchValue.toString().trim(),
           // ...this.state.para
       };
@@ -446,67 +446,31 @@ let Promotion_class_modal = React.createClass({
       'ant-search-input': true,
       'ant-search-input-focus': this.state.focus,
     });
-    // let cascaderOptions = this.promotionClass('0');
     return (
-      <div style={{display:'inline',marginLeft:5}} {...this.props.ss}>
-        <Button type="ghost" onClick={this.showModal} size="small"><Icon type="bars" />商品设置</Button>
-        <Modal title="" width="680" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}>
-          <Tabs onChange={this.onTabsChange} activeKey={this.state.activeKey} type="line" onEdit={this.onEdit} hideAdd >
-            <TabPane tab="添加分类" key="1">
-              {/*<div style={formStyle}>
-                <label>分类选择:</label>
-                <Cascader options={this.state.cascaderOptions} expandTrigger="hover" onChange={this.onCascaderChange} placeholder="请选择分类" style={{ width: 230,backgroundColor: 'white' }} />
-                <Button type="primary" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="plus" />添 加</Button>
-                <Button type="primary" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="edit" />修 改</Button>
-                <Button type="ghost" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="delete" />删 除</Button>
-                <Button type="ghost" onClick={this.noSelect} style={{float:"right"}} ><Icon type="cross" />不选</Button>
-              </div>
-              <Table  rowSelection={rowSelection}
-                      onRowClick={this.handleRowClick}
-                      columns = {columns}//classColumns
-                      dataSource = {this.state.data}
-                      scroll={{ x: false, y: false }}
-                      pagination = {this.state.pagination}
-                      loading = {loading}
-                      onChange = {this.handleTableChange}
-                      rowKey = {record => record.S_Promotion_Range_ID}
-                      size='small'
-                      bordered />*/}
-              <Promotion_class_iform />
-            </TabPane>
-            <TabPane tab="排除商品" key="2">
-              <div style={formStyle}>
-                <SProductAction_Modal action={this.addProduct}/>
-                <Button type="ghost" onClick={this.confirmDelete} style={{marginLeft:5}} ><Icon type="delete" />删除</Button>
-                {/* ---搜索组合框--- */}
-                <div style={{display:'inline-block',marginBottom:-10,marginLeft:5,width: 180}} >
-                  <InputGroup className={searchCls} >
-                    <Input {...restProps} value={this.state.searchValue} onChange={this.handleInputChange}
-                      onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.handleSearch} />
-                    <div className="ant-input-group-wrap">
-                      <Button icon="search" className={btnCls} size={size} onClick={this.handleSearch} />
-                    </div>
-                  </InputGroup>
-                </div> {/*-end-*/}
-                <Button type="ghost" onClick={this.noSelect} style={{float:"right"}} ><Icon type="cross" />不选</Button>
-              </div>
-              <Table  rowSelection={rowSelection}
-                      onRowClick={this.handleRowClick}
-                      columns = {columns}
-                      dataSource = {this.state.data}
-                      scroll={{ x: false, y: false }}
-                      pagination = {this.state.pagination}
-                      loading = {loading}
-                      onChange = {this.handleTableChange}
-                      rowKey = {record => record.S_Promotion_Range_ID}
-                      size='small'
-                      bordered />
-            </TabPane>
-          </Tabs>
-        </Modal>
+      <div>
+        <div style={formStyle}>
+          <label>分类选择:</label>
+          <Cascader options={this.state.cascaderOptions} expandTrigger="hover" onChange={this.onCascaderChange} placeholder="请选择分类" style={{ width: 230,backgroundColor: 'white' }} />
+          <Button type="primary" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="plus" />添 加</Button>
+          <Button type="primary" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="edit" />修 改</Button>
+          <Button type="ghost" onClick={this.promotionClasstest} style={{marginLeft:5}} ><Icon type="delete" />删 除</Button>
+          <Button type="ghost" onClick={this.noSelect} style={{float:"right"}} ><Icon type="cross" />不选</Button>
+        </div>
+        <Table  rowSelection={rowSelection}
+                onRowClick={this.handleRowClick}
+                columns = {columns}//classColumns
+                dataSource = {this.state.data}
+                scroll={{ x: false, y: false }}
+                pagination = {this.state.pagination}
+                loading = {loading}
+                onChange = {this.handleTableChange}
+                rowKey = {record => record.S_Promotion_Range_ID}
+                size='small'
+                bordered />
       </div>
+
     );
   },
 });
 
-export default Promotion_class_modal;
+export default Promotion_class_iform;
