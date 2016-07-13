@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions'
 import CTabs from './CTabs';
 import MenuAccordion from './MenuAccordion';
 // import NavbarSide from '../component/NavbarSide';

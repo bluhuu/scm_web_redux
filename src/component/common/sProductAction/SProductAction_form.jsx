@@ -52,7 +52,7 @@ let SProductAction_form = React.createClass({
           <FormItem label="名称:">
             <Input placeholder="" style={{ width: 120 }} {...getFieldProps('name')} />
           </FormItem>
-          <Button type="primary" htmlType="submit" style={{'marginLeft':'25'}} ><Icon type="search" />查询</Button>&nbsp;
+          <Button type="primary" htmlType="submit" style={{'marginLeft':25}} ><Icon type="search" />查询</Button>&nbsp;
         </Form>
 
     );

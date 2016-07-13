@@ -47,21 +47,21 @@ function fetchPosts(reddit) {
 
 //是否需要获取文章
 function shouldFetchPosts(state, reddit) {
-  const posts = state.postsByReddit[reddit]
+  const posts = state.postsByReddit[reddit];
   if (!posts) {
-    return true
+    return true;
   }
   if (posts.isFetching) {
-    return false
+    return false;
   }
-  return posts.didInvalidate
+  return posts.didInvalidate;
 }
 
 //如果需要则开始获取文章
 export function fetchPostsIfNeeded(reddit) {
   return (dispatch, getState) => {
     if (shouldFetchPosts(getState(), reddit)) {
-      return dispatch(fetchPosts(reddit))
+      return dispatch(fetchPosts(reddit));
     }
-  }
+  };
 }
