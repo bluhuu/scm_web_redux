@@ -64,6 +64,7 @@ const columns = [{
     width: 100,
     sortable: true,
     dataIndex: 'ProductCode'
+
 },
 // {
 //     title: '操作',

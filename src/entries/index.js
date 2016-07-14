@@ -12,7 +12,6 @@ const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-      <App width={window.innerWidth}
-        height={window.innerHeight}/>
+      <App width={window.innerWidth} height={window.innerHeight}/>
     </Provider>,
     document.getElementById('react-content'));
