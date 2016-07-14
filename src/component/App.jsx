@@ -1,14 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions'
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions';
 import CTabs from './CTabs';
 import MenuAccordion from './MenuAccordion';
 // import NavbarSide from '../component/NavbarSide';
 
-const App = React.createClass({
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.addTab = this.addTab.bind(this)
+  }
   addTab(e) {
     this.refs.Rctabs.addTab(e);
-  },
+  }
   render() {
     return (
       <div>
@@ -34,5 +38,34 @@ const App = React.createClass({
         </div>
     );
   }
-});
-export default App;
+}
+
+// App.propTypes = {
+//   selectedReddit: PropTypes.string.isRequired,
+//   posts: PropTypes.array.isRequired,
+//   isFetching: PropTypes.bool.isRequired,
+//   lastUpdated: PropTypes.number,
+//   dispatch: PropTypes.func.isRequired
+// }
+
+function mapStateToProps(state) {
+  const { sproduct_list } = state
+  const {
+    isFetching,
+    lastUpdated,
+    selected,
+    items: posts
+  } = sproduct_list || {
+    isFetching: true,
+    items: []
+  }
+
+  return {
+    selected,
+    posts,
+    isFetching,
+    lastUpdated
+  }
+}
+
+export default connect(mapStateToProps)(App)

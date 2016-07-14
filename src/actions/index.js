@@ -1,67 +1,57 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_POSTS = 'REQUEST_POSTS';
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const SELECT_REDDIT = 'SELECT_REDDIT';
-export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT';
-//选择新闻类型action
-export function selectReddit(reddit) {
+import * as types from '../constants/ActionTypes'
+
+//选择action
+export function selectSproductItem(sproduct) {
   return {
-    type: SELECT_REDDIT,
-    reddit
+    type: types.SELECT_SPRODUCT_ITEM,
+    sproduct
   };
 }
-//废弃新闻类型action
-export function invalidateReddit(reddit) {
+//废弃类型action
+export function invalidateSproductList(sproduct) {
   return {
-    type: INVALIDATE_REDDIT,
-    reddit
+    type: types.INVALIDATE_SPRODUCT_LIST,
+    sproduct
   };
 }
-//开始获取新闻action
-function requestPosts(reddit) {
+//开始获取action
+function requestSproductList(sproduct) {
   return {
-    type: REQUEST_POSTS,
-    reddit
+    type: types.REQUEST_SPRODUCT_LIST,
+    sproduct
   };
 }
-//获取新闻成功的action
-function receivePosts(reddit, json) {
+//获取成功的action
+function receiveSproductList(sproduct, json) {
   return {
-    type: RECEIVE_POSTS,
-    reddit: reddit,
-    posts: json.data.children.map(child => child.data),
+    type: RECEIVE_SPRODUCT_LIST,
+    sproduct: sproduct,
+    sproducts: json.data.children.map(child => child.data),
     receivedAt: Date.now()
   };
 }
 
-//获取文章，先触发requestPosts开始获取action，完成后触发receivePosts获取成功的action
-function fetchPosts(reddit) {
+//获取，先触发requestPosts开始获取action，完成后触发receivePosts获取成功的action
+function fetchSproductList(sproduct,pagination) {
   return dispatch => {
-    dispatch(requestPosts(reddit));
-    return fetch(`https://www.reddit.com/r/${reddit}.json`)
+    dispatch(requestPosts(sproduct));
+    return fetch(`/elink_scm_web/sproductAction/query.do`,{
+      method: 'POST',
+			headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+			// headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+			credentials: 'include',
+			body:'limit=' + pagination.pageSize + '&start=' + (pagination.current - 1) * pagination.pageSize
+    })
       .then(response => response.json())
-      .then(json => dispatch(receivePosts(reddit, json)));
+      .then(json => dispatch(receiveSproductList(sproduct, json)));
   };
 }
 
-//是否需要获取文章
-function shouldFetchPosts(state, reddit) {
-  const posts = state.postsByReddit[reddit];
-  if (!posts) {
-    return true;
-  }
-  if (posts.isFetching) {
-    return false;
-  }
-  return posts.didInvalidate;
-}
-
-//如果需要则开始获取文章
-export function fetchPostsIfNeeded(reddit) {
+//如果需要则开始获取
+export function fetchPostsIfNeeded(sproduct,pagination) {
   return (dispatch, getState) => {
-    if (shouldFetchPosts(getState(), reddit)) {
-      return dispatch(fetchPosts(reddit));
-    }
+    return dispatch(fetchSproductList(sproduct,pagination));
   };
 }
