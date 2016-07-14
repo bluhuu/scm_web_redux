@@ -127,6 +127,7 @@ let Promotion_class_iform = React.createClass({
   componentDidMount() {
     // let cascaderOptions = this.promotionClass('0');
     this.setState({
+      // cascaderOptions:this.promotionClass('0')
       cascaderOptions:this.promotionClass('0')
     });
       // this.fetch();
@@ -234,6 +235,60 @@ let Promotion_class_iform = React.createClass({
     }
   },
 
+  promotionClassfetch: function(nodeID) {
+    let _self = this;
+    let retrunData=null;
+    fetch(`/elink_scm_web/sClassAction/query.do`,{
+      method: 'POST',
+			headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+			// headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+			credentials: 'include',
+			body:'id=' + nodeID + '&showChecked=true&node=' + nodeID
+    })
+      .then(function(response) {
+    		if (response.ok) {
+    			return response.json();//response.text()
+    		}else{
+    			console.log('Looks like there was a problem. Status Code: ' + response.status);
+    			return;
+    		}
+    	}).then(function(result) {
+
+        return Promise.all(
+          result.map(function (row) {
+            if (!row.leaf) {
+              row.children=_self.promotionClassfetch(row.id);
+            }
+            return (row);
+          })
+        );
+        // console.log(result);
+        // return result;
+
+        //   return (function() {
+        //     for(let i=0;i<result.length;i++){
+        //       (function(i){
+        //         if (!result[i].leaf) {
+        //           result[i].children=_self.promotionClassfetch(result[i].id);
+        //         }
+        //         result[i].value=result[i].id;
+        //         result[i].label=result[i].text;
+        //         delete result[i].id;
+        //         delete result[i].text;
+        //       })(i)
+        //     }
+        //     console.log("---retrunData--11--------------",result);
+        //     return result;
+        // })();
+    	}).then(function(data) {
+        console.log("---retrunData--22--------------",data);
+        console.log("---retrunData--22--------------",result);
+        // return retrunData;
+    	}).catch(function(err) {
+    		console.log("sClassAction fetch 请求失败!");
+    	});
+    return retrunData;
+  },
   promotionClass: function(nodeID) {
     let _self = this;
     let data=null;

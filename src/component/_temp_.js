@@ -95,3 +95,28 @@ ReactDOM.render(
     style={{ width: 200 }}
   />
 , mountNode);
+
+
+remote.allDocs({
+    include_docs: true,
+    attachment: true
+}).then(functionb (result) {
+    var docs = result.rows;
+    docs.forEach(function(element) {
+        localdb.put(element.doc).then(function(response){
+            alert('pulled doc with id' + element.doc._id + 'and added to local db.');}).catch(function (err) {
+        if (err.status == 409) {
+            localdb.get(element.doc._id).then(function (resp) {
+             localdb.remove(resp._id, resp._rev).then(function (resp) {
+// et cetera...
+
+
+remotedb.allDocs(...).then(functioin (resultofAllDocs) {
+    return localdb.put(...);
+}).then(function (resultOfPut) {
+    return localdb.get(...);
+}).then(function (resultOfGet) {
+    return localdb.put(...);
+}).catch(function (err) {
+    console.log(err);
+});
