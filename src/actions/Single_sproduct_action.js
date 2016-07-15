@@ -51,7 +51,7 @@ function fetchSproductList(pagination) {
       .then(response => response.json())
       .then(json => dispatch(receiveSproductList(pagination, json)));
   };
-}
+}//dispatch(receiveSproductList(pagination, json))
 
 //如果需要则开始获取
 export function fetchPostsIfNeeded(pagination) {
