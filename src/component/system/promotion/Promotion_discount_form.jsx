@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Select, DatePicker, Col } from 'antd';
 import SelectByRefId from '../../common/SelectByRefId';
 import '../../common/Format';
 import ExceptExcel from '../../common/ExportExcel';
-import columns from './columns';
+import Promotion_columns from './Promotion_columns';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const RangePicker = DatePicker.RangePicker;
@@ -43,7 +43,7 @@ let Promotion_discount_form = React.createClass({
     e.preventDefault();
     this.setState({ loading: true });
     let paras = this.getParas();
-    ExceptExcel(paras,columns,"/elink_scm_web/promotionAction/promotionListExport.do","折扣管理");
+    ExceptExcel(paras,Promotion_columns,"/elink_scm_web/promotionAction/promotionListExport.do","折扣管理");
     this.setState({ loading: false });
   },
 

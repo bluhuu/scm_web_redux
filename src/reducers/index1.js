@@ -12,13 +12,13 @@ function selectedReddit(state = 'reactjs', action) {
 }
 
 function posts(state = {
-  //是否正在获取最新
-  isFetching: false,
-  //是否废弃
-  didInvalidate: false,
-  //内容
-  items: []
-}, action) {
+    //是否正在获取最新
+    isFetching: false,
+    //是否废弃
+    didInvalidate: false,
+    //内容
+    items: []
+  }, action) {
   switch (action.type) {
     case INVALIDATE_REDDIT:
       return Object.assign({}, state, {

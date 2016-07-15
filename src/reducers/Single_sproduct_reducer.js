@@ -6,26 +6,26 @@ function sproduct(state, action) {
   switch (action.type) {
     case SELECT_SPRODUCT_ITEM:
       return Object.assign({}, state, {
-        selected: action.selected
+        selectedRowKeys: action.selectedRowKeys
       });
     case INVALIDATE_SPRODUCT_LIST:
       return Object.assign({}, state, {
         didInvalidate: true,
-        selected     : []
+        selectedRowKeys     : []
       });
     case REQUEST_SPRODUCT_LIST:
       return Object.assign({}, state, {
-        isFetching   : true,
+        loading   : true,
         didInvalidate: false,
-        selected     : [],
+        selectedRowKeys     : [],
       });
     case RECEIVE_SPRODUCT_LIST:
       return Object.assign({}, state, {
-        isFetching   : false,
+        loading   : false,
         didInvalidate: false,
         total        : action.total,
         pagination   : action.pagination,
-        selected     : [],
+        selectedRowKeys     : [],
         data         : action.data,
         lastUpdated  : action.receivedAt
       });
@@ -36,13 +36,13 @@ function sproduct(state, action) {
 //废弃、接收到、开始接受新闻后，将state.postsByReddit设为相关参数
 export default function Single_sproduct_reducer(state = {sproduct_list: {
   //是否正在获取最新
-  isFetching   : false,
+  loading   : false,
   //是否废弃
   didInvalidate: false,
   //内容
   data         : [],
   //所选项
-  selected     : [],
+  selectedRowKeys     : [],
   //分页
   pagination   : {pageSize:8,current:1,total:0}
 }}, action) {

@@ -1,5 +1,5 @@
 import React from 'react';
-let columns = [{
+let Promotion_columns = [{
     title: '活动编号',
     width: 120,
     sortable: true,
@@ -80,4 +80,4 @@ let columns = [{
 //     render: () => <a href="#">操作</a>,
 // },
 ];
-export default columns;
+export default Promotion_columns;

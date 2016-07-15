@@ -1,7 +1,7 @@
 import React from 'react';
 import {Table, Button, message, Modal, Icon} from 'antd';
 import * as $ from 'jquery';
-import Columns from './Columns';
+import Promotion_columns from './Promotion_columns';
 import "../../common/Format"
 
 import Promotion_discount_form from './Promotion_discount_form';
@@ -199,7 +199,7 @@ let promotion_discount_main = React.createClass({
                 <Promotion_class_modal selectedRows={this.state.selectedRows}/>
                 <Button type="ghost" onClick={this.noSelect} size="small" style={{float:"right"}} ><Icon type="cross" />不选</Button>
               </div>
-                <Table  rowSelection={rowSelection} onRowClick={this.handleRowClick} columns = {Columns} dataSource = {this.state.data}
+                <Table  rowSelection={rowSelection} onRowClick={this.handleRowClick} columns = {Promotion_columns} dataSource = {this.state.data}
                         //scroll={{ x: true, y: 300 }}
                         pagination = {this.state.pagination} loading = {loading} onChange = {this.handleTableChange}//分页
                         rowKey = {record => record.S_PROMOTION_ID} size="small" bordered  />

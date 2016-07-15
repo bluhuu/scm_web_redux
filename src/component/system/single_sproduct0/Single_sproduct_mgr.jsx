@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../../../actions/Single_sproduct_action';
+import { selectSproductItem, fetchPostsIfNeeded, invalidateReddit } from '../../../actions/Single_sproduct_action';
 import {Table, Button} from 'antd';
 import * as $ from 'jquery';
 import Single_sproduct_Form from './Single_sproduct_Form'
@@ -80,21 +80,7 @@ const columns = [
  ];
 
 const Single_sproduct_mgr = React.createClass({
-            getInitialState() {
-                return {
-                    selectedRowKeys: [],  // 这里配置默认勾选列
-                    data: [],
-                    pagination: {pageSize:8,current:1},
-                    loading: false,
-                };
-            },
             handleTableChange(pagination, filters, sorter) {
-                // const pager = this.state.pagination;
-                // pager.current = pagination.current;
-                // this.setState({
-                //     pagination: pager,
-                // });
-                // console.log(pagination);
                 const { dispatch } = this.props;
                 dispatch(fetchPostsIfNeeded(pagination));
             },
@@ -119,54 +105,38 @@ const Single_sproduct_mgr = React.createClass({
                     },
                 });
             },
-            //初始化渲染后触发
-            // componentDidMount() {
-            //   console.log('执行componentDidMount');
-            //   const { dispatch, pagination } = this.props;
-            //   dispatch(fetchPostsIfNeeded(pagination));
-            // }
             componentDidMount() {
-                // console.log('执行componentDidMount');
                 const { dispatch, pagination } = this.props;
                 dispatch(fetchPostsIfNeeded(pagination));
-
-                // this.fetch({
-                //     limit: this.state.pagination.pageSize,
-                //     start: (this.state.pagination.current - 1) * this.state.pagination.pageSize
-                // });
-            },
-            start() {
-                this.setState({
-                    loading: true
-                });
-                // 模拟 ajax 请求，完成后清空
-                setTimeout(() => {
-                    this.setState({
-                        selectedRowKeys: [],
-                        loading: false,
-                    });
-                }, 500);
             },
             onSelectChange(selectedRowKeys) {
-                // console.log('selectedRowKeys changed: ', selectedRowKeys);
-                this.setState({
-                    selectedRowKeys
-                });
+                const { dispatch } = this.props;
+                dispatch(selectSproductItem(selectedRowKeys))
+            },
+            handleRowClick(record,index) {
+              const { dispatch } = this.props;
+              let keySet = new Set(this.props.selectedRowKeys);
+              if(keySet.delete(record.S_Product_ID)){
+                dispatch(selectSproductItem([...keySet]))
+              }else{
+                dispatch(selectSproductItem([...keySet.add(record.S_Product_ID)]))
+              }
             },
             render() {
-                const { loading, selectedRowKeys } = this.state;
-                const rowSelection = {selectedRowKeys,onChange: this.onSelectChange,};
-                const hasSelected = selectedRowKeys.length > 0;
+                // const { loading, selectedRowKeys } = this.props;
+                const rowSelection = {selectedRowKeys:this.props.selectedRowKeys, onChange: this.onSelectChange,};
+                // const hasSelected = selectedRowKeys.length > 0;
                 return (
                     <div>
                         <Single_sproduct_Form query={this.fetch}/>
                         <Single_sproduct_Modal/>
                         < Table     rowSelection={rowSelection}
+                                    onRowClick={this.handleRowClick}
                                     columns = {columns}
                                     dataSource = {this.props.data}
                                     // scroll={{ x: true, y: 300 }}
                                     pagination = {this.props.pagination}
-                                    loading = {this.props.isFetching}
+                                    loading = {this.props.loading}
                                     onChange = {this.handleTableChange}
                                     rowKey = {record => record.S_Product_ID}
                                     bordered  />
@@ -177,10 +147,10 @@ const Single_sproduct_mgr = React.createClass({
 
 function mapStateToProps(state) {
   const { Single_sproduct_reducer:{sproduct_list} } = state;
-  const { isFetching, didInvalidate, selected, data, pagination, lastUpdated
-  } = sproduct_list || { isFetching: true, data: [], pagination:{pageSize:8,current:1} }
+  const { loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated
+  } = sproduct_list || { loading: true, data: [], pagination:{pageSize:8,current:1,total:0} }
 
-  return { sproduct_list, isFetching, didInvalidate, selected, data, pagination, lastUpdated }
+  return { sproduct_list, loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated }
 }
 
 export default connect(mapStateToProps)(Single_sproduct_mgr)
