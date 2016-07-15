@@ -81,33 +81,17 @@ const columns = [
 
 const Single_sproduct_mgr = React.createClass({
             handleTableChange(pagination, filters, sorter) {
-                const { dispatch } = this.props;
-                dispatch(fetchPostsIfNeeded(pagination));
+                const { dispatch, params } = this.props;
+                dispatch(fetchPostsIfNeeded(pagination, params));
             },
             fetch(params = {}) {
-                // console.log('请求参数：', params);
-                var _self = this;
-                this.setState({
-                    loading: true
-                });
-                $.ajax({
-                    url: this.props.url,
-                    data: params,
-                    dataType: "json",
-                    success: function(result) {
-                        const pagination = _self.state.pagination;
-                        pagination.total = result.total;
-                        _self.setState({
-                            loading: false,
-                            data: result.rows,
-                            pagination,
-                        });
-                    },
-                });
+              const { dispatch, pagination } = this.props;
+              let page = Object.assign({},pagination,{current:1});
+              dispatch(fetchPostsIfNeeded(page,params));
             },
             componentDidMount() {
-                const { dispatch, pagination } = this.props;
-                dispatch(fetchPostsIfNeeded(pagination));
+                const { dispatch, pagination, params } = this.props;
+                dispatch(fetchPostsIfNeeded(pagination, params));
             },
             onSelectChange(selectedRowKeys) {
                 const { dispatch } = this.props;
@@ -147,10 +131,10 @@ const Single_sproduct_mgr = React.createClass({
 
 function mapStateToProps(state) {
   const { Single_sproduct_reducer:{sproduct_list} } = state;
-  const { loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated
+  const { loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated, params
   } = sproduct_list || { loading: true, data: [], pagination:{pageSize:8,current:1,total:0} }
 
-  return { sproduct_list, loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated }
+  return { sproduct_list, loading, didInvalidate, selectedRowKeys, data, pagination, lastUpdated, params }
 }
 
 export default connect(mapStateToProps)(Single_sproduct_mgr)

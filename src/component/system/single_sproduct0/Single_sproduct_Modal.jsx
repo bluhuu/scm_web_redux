@@ -31,7 +31,7 @@ let Single_sproduct_Modal = React.createClass({
     return (
       <div>
         <Button type="primary" onClick={this.showModal} size="small"><Icon type="plus" />添加</Button>
-        <Modal title="添加商品" width="820" visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}>
+        <Modal title="添加商品" width={820} visible={this.state.visible} onOk={this.handleSubmit} onCancel={this.hideModal}>
           <Form horizontal  className="ant-advanced-search-form" form={this.props.form} style={{padding:20}}>
             <Row gutter={16} >
               <Col span="8" >

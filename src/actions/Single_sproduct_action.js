@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import * as $ from 'jquery';
 
 import * as types from '../constants/ActionTypes';
 
@@ -24,7 +25,7 @@ function requestSproductList(pagination) {
   };
 }
 //获取成功的action
-function receiveSproductList(pagination, json) {
+function receiveSproductList(pagination, params, json) {
   // console.log(json);
   pagination.total = json.total;
   return {
@@ -32,30 +33,53 @@ function receiveSproductList(pagination, json) {
     pagination: pagination,
     total: json.total,
     data: json.rows,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
+    params:params
   };
 }
 
 //获取，先触发requestPosts开始获取action，完成后触发receivePosts获取成功的action
-function fetchSproductList(pagination) {
+function fetchSproductList(pagination,params) {
   // console.log("pagination_action:",pagination);
   return dispatch => {
     dispatch(requestSproductList(pagination));
-    return fetch(`/elink_scm_web/sproductAction/query.do`,{
-      method: 'POST',
-			headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-			// headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-			credentials: 'include',
-			body:'limit=' + pagination.pageSize + '&start=' + (pagination.current - 1) * pagination.pageSize
-    })
-      .then(response => response.json())
-      .then(json => dispatch(receiveSproductList(pagination, json)));
+    // return fetch(`/elink_scm_web/sproductAction/query.do`,{
+    //   method: 'POST',
+		// 	headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+		// 	// headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+		// 	credentials: 'include',
+		// 	body:'limit=' + pagination.pageSize + '&start=' + (pagination.current - 1) * pagination.pageSize
+    // })
+    //   .then(response => response.json())
+    //   .then(json => dispatch(receiveSproductList(pagination, json)));
+
+
+    $.ajax({
+      url: `/elink_scm_web/sproductAction/query.do`,
+      data: params,
+      dataType: "json",
+      success: function(result) {
+        dispatch(receiveSproductList(pagination, params, result))
+      },
+      error: function(e) {
+        console.log("sproductAction 请求失败: ",e);
+      }
+    });
+
   };
+
+
+      // console.log('请求参数：', params);
+
+
+
+
+
 }//dispatch(receiveSproductList(pagination, json))
 
 //如果需要则开始获取
-export function fetchPostsIfNeeded(pagination) {
+export function fetchPostsIfNeeded(pagination,params = {}) {
   return (dispatch) => {
-    return dispatch(fetchSproductList(pagination));
+    return dispatch(fetchSproductList(pagination,params));
   };
 }

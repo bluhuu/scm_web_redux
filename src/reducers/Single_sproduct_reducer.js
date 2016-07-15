@@ -21,13 +21,14 @@ function sproduct(state, action) {
       });
     case RECEIVE_SPRODUCT_LIST:
       return Object.assign({}, state, {
-        loading   : false,
-        didInvalidate: false,
-        total        : action.total,
-        pagination   : action.pagination,
-        selectedRowKeys     : [],
-        data         : action.data,
-        lastUpdated  : action.receivedAt
+        loading         : false,
+        didInvalidate   : false,
+        total           : action.total,
+        pagination      : action.pagination,
+        selectedRowKeys : [],
+        data            : action.data,
+        lastUpdated     : action.receivedAt,
+        params          : action.params
       });
     default:
       return state;
@@ -35,16 +36,12 @@ function sproduct(state, action) {
 }
 //废弃、接收到、开始接受新闻后，将state.postsByReddit设为相关参数
 export default function Single_sproduct_reducer(state = {sproduct_list: {
-  //是否正在获取最新
-  loading   : false,
-  //是否废弃
-  didInvalidate: false,
-  //内容
-  data         : [],
-  //所选项
-  selectedRowKeys     : [],
-  //分页
-  pagination   : {pageSize:8,current:1,total:0}
+  loading         : false,                          //是否正在获取最新
+  didInvalidate   : false,                          //是否废弃
+  data            : [],                             //内容
+  selectedRowKeys : [],                             //所选项
+  pagination      : {pageSize:8,current:1,total:0}, //分页
+  params          : {}                              //请求参数
 }}, action) {
   switch (action.type) {
     case SELECT_SPRODUCT_ITEM    :
