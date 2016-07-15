@@ -1,18 +1,8 @@
 import { REQUEST_SPRODUCT_LIST, RECEIVE_SPRODUCT_LIST, SELECT_SPRODUCT_ITEM, INVALIDATE_SPRODUCT_LIST
 } from '../constants/ActionTypes';
 
-function sproduct(state = {
-  //是否正在获取最新
-  isFetching: false,
-  //是否废弃
-  didInvalidate: false,
-  //内容
-  data: [],
-  //所选项
-  selected:[],
-  //分页
-  pagination: {pageSize:8,current:1}
-}, action) {
+function sproduct(state, action) {
+  console.log("state: ",state);
   switch (action.type) {
     case SELECT_SPRODUCT_ITEM:
       return Object.assign({}, state, {
@@ -42,7 +32,18 @@ function sproduct(state = {
   }
 }
 //废弃、接收到、开始接受新闻后，将state.postsByReddit设为相关参数
-export default function sproduct_list(state = { }, action) {
+export default function Single_sproduct_reducer(state = {sproduct_list: {
+  //是否正在获取最新
+  isFetching: false,
+  //是否废弃
+  didInvalidate: false,
+  //内容
+  data: [],
+  //所选项
+  selected:[],
+  //分页
+  pagination: {pageSize:8,current:1}
+}}, action) {
   switch (action.type) {
     case SELECT_SPRODUCT_ITEM:
     case INVALIDATE_SPRODUCT_LIST:

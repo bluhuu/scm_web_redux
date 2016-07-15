@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-import * as types from '../constants/ActionTypes'
+import * as types from '../constants/ActionTypes';
 
 //选择action
 export function selectSproductItem(sproduct) {
@@ -24,19 +24,22 @@ function requestSproductList(sproduct) {
   };
 }
 //获取成功的action
-function receiveSproductList(sproduct, json) {
+function receiveSproductList(pagination, json) {
+  console.log(json);
   return {
-    type: RECEIVE_SPRODUCT_LIST,
-    sproduct: sproduct,
-    sproducts: json.data.children.map(child => child.data),
+    type: types.RECEIVE_SPRODUCT_LIST,
+    pagination: pagination,
+    total: json.total,
+    data: json.rows,
     receivedAt: Date.now()
   };
 }
 
 //获取，先触发requestPosts开始获取action，完成后触发receivePosts获取成功的action
-function fetchSproductList(sproduct,pagination) {
+function fetchSproductList(pagination) {
+  console.log("pagination_action:",pagination);
   return dispatch => {
-    dispatch(requestPosts(sproduct));
+    // dispatch(requestPosts(pagination));
     return fetch(`/elink_scm_web/sproductAction/query.do`,{
       method: 'POST',
 			headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
@@ -45,13 +48,13 @@ function fetchSproductList(sproduct,pagination) {
 			body:'limit=' + pagination.pageSize + '&start=' + (pagination.current - 1) * pagination.pageSize
     })
       .then(response => response.json())
-      .then(json => dispatch(receiveSproductList(sproduct, json)));
+      .then(json => dispatch(receiveSproductList(pagination, json)));
   };
 }
 
 //如果需要则开始获取
-export function fetchPostsIfNeeded(sproduct,pagination) {
-  return (dispatch, getState) => {
-    return dispatch(fetchSproductList(sproduct,pagination));
+export function fetchPostsIfNeeded(pagination) {
+  return (dispatch) => {
+    return dispatch(fetchSproductList(pagination));
   };
 }

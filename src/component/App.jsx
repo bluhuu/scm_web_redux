@@ -7,11 +7,17 @@ import MenuAccordion from './MenuAccordion';
 
 class App extends Component {
   constructor(props) {
-    super(props)
-    this.addTab = this.addTab.bind(this)
+    super(props);
+    this.addTab = this.addTab.bind(this);
   }
   addTab(e) {
     this.refs.Rctabs.addTab(e);
+  }
+  //初始化渲染后触发
+  componentDidMount() {
+    console.log('执行componentDidMount');
+    const { dispatch, pagination } = this.props;
+    dispatch(fetchPostsIfNeeded(pagination));
   }
   render() {
     return (
@@ -49,21 +55,30 @@ class App extends Component {
 // }
 
 function mapStateToProps(state) {
-  const { sproduct_list } = state
+  const { Single_sproduct_reducer:{sproduct_list} } = state;
+  // const { sproduct_list } = Single_sproduct_reducer;
+  console.log("state: ",state);
+  console.log("sproduct_list: ",sproduct_list);
   const {
     isFetching,
-    lastUpdated,
+    didInvalidate,
     selected,
-    items: posts
+    data,
+    pagination,
+    lastUpdated
   } = sproduct_list || {
     isFetching: true,
-    items: []
+    data: [],
+    pagination:{pageSize:8,current:1}
   }
 
   return {
-    selected,
-    posts,
+    sproduct_list,
     isFetching,
+    didInvalidate,
+    selected,
+    data,
+    pagination,
     lastUpdated
   }
 }
