@@ -25,7 +25,8 @@ function requestSproductList(sproduct) {
 }
 //获取成功的action
 function receiveSproductList(pagination, json) {
-  console.log(json);
+  // console.log(json);
+  pagination.total = json.total;
   return {
     type: types.RECEIVE_SPRODUCT_LIST,
     pagination: pagination,
@@ -37,9 +38,9 @@ function receiveSproductList(pagination, json) {
 
 //获取，先触发requestPosts开始获取action，完成后触发receivePosts获取成功的action
 function fetchSproductList(pagination) {
-  console.log("pagination_action:",pagination);
+  // console.log("pagination_action:",pagination);
   return dispatch => {
-    // dispatch(requestPosts(pagination));
+    dispatch(requestSproductList(pagination));
     return fetch(`/elink_scm_web/sproductAction/query.do`,{
       method: 'POST',
 			headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },

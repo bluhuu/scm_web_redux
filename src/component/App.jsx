@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions';
+// import { connect } from 'react-redux';
+// import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions';
 import CTabs from './CTabs';
 import MenuAccordion from './MenuAccordion';
 // import NavbarSide from '../component/NavbarSide';
@@ -13,12 +13,12 @@ class App extends Component {
   addTab(e) {
     this.refs.Rctabs.addTab(e);
   }
-  //初始化渲染后触发
-  componentDidMount() {
-    console.log('执行componentDidMount');
-    const { dispatch, pagination } = this.props;
-    dispatch(fetchPostsIfNeeded(pagination));
-  }
+  // //初始化渲染后触发
+  // componentDidMount() {
+  //   console.log('执行componentDidMount');
+  //   const { dispatch, pagination } = this.props;
+  //   dispatch(fetchPostsIfNeeded(pagination));
+  // }
   render() {
     return (
       <div>
@@ -54,33 +54,34 @@ class App extends Component {
 //   dispatch: PropTypes.func.isRequired
 // }
 
-function mapStateToProps(state) {
-  const { Single_sproduct_reducer:{sproduct_list} } = state;
-  // const { sproduct_list } = Single_sproduct_reducer;
-  console.log("state: ",state);
-  console.log("sproduct_list: ",sproduct_list);
-  const {
-    isFetching,
-    didInvalidate,
-    selected,
-    data,
-    pagination,
-    lastUpdated
-  } = sproduct_list || {
-    isFetching: true,
-    data: [],
-    pagination:{pageSize:8,current:1}
-  }
-
-  return {
-    sproduct_list,
-    isFetching,
-    didInvalidate,
-    selected,
-    data,
-    pagination,
-    lastUpdated
-  }
-}
-
-export default connect(mapStateToProps)(App)
+// function mapStateToProps(state) {
+//   const { Single_sproduct_reducer:{sproduct_list} } = state;
+//   // const { sproduct_list } = Single_sproduct_reducer;
+//   console.log("state: ",state);
+//   console.log("sproduct_list: ",sproduct_list);
+//   const {
+//     isFetching,
+//     didInvalidate,
+//     selected,
+//     data,
+//     pagination,
+//     lastUpdated
+//   } = sproduct_list || {
+//     isFetching: true,
+//     data: [],
+//     pagination:{pageSize:8,current:1}
+//   }
+//
+//   return {
+//     sproduct_list,
+//     isFetching,
+//     didInvalidate,
+//     selected,
+//     data,
+//     pagination,
+//     lastUpdated
+//   }
+// }
+//
+// export default connect(mapStateToProps)(App)
+export default App;
